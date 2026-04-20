@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freestyle Rope Art — Nick Pearson | Art · Touch · Connection · Intimacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ef;
+    --rope-amber: #c8872a;
+    --rope-warm: #d4a055;
+    --rope-dark: #6b3d1e;
+    --grey-mid: #2a2a2a;
+    --grey-light: #3d3d3d;
+    --text-muted: #888;
+    --accent: #c8872a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+    cursor: default;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--rope-amber); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0) 100%);
+    transition: background 0.4s;
+  }
+
+  nav.scrolled {
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    cursor: pointer;
+    line-height: 1.1;
+  }
+
+  .nav-logo span {
+    display: block;
+    color: var(--rope-amber);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--rope-amber);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--rope-amber); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-links .services-parent { position: relative; }
+  .services-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1rem;
+    background: rgba(10,10,10,0.98);
+    border: 1px solid var(--grey-mid);
+    border-top: 2px solid var(--rope-amber);
+    min-width: 220px;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links .services-parent:hover .services-dropdown { display: block; }
+
+  .services-dropdown a {
+    display: block;
+    padding: 0.6rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    white-space: nowrap;
+  }
+
+  .services-dropdown a:hover {
+    color: var(--rope-amber);
+    background: rgba(200,135,42,0.05);
+  }
+
+  .services-dropdown a::after { display: none; }
+
+  .nav-contact-btn {
+    background: transparent;
+    border: 1px solid var(--rope-amber);
+    color: var(--rope-amber) !important;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .nav-contact-btn:hover {
+    background: var(--rope-amber) !important;
+    color: var(--black) !important;
+  }
+
+  .nav-contact-btn::after { display: none !important; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ─── HOME HERO ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 6rem 3rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://static.wixstatic.com/media/e836d2_b361996302be455a918da2ed87e68790~mv2.jpg/v1/fill/w_1400,h_934,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_0004%20(Large).JPG');
+    background-size: cover;
+    background-position: center 30%;
+    filter: grayscale(60%);
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+
+  .hero-bg.loaded { transform: scale(1); }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10,10,10,1) 0%,
+      rgba(10,10,10,0.5) 40%,
+      rgba(10,10,10,0.15) 70%,
+      rgba(10,10,10,0.05) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    animation: heroIn 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes heroIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rope-amber);
+  }
+
+  .hero-tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-tagline span {
+    color: var(--rope-warm);
+    border-left: 1px solid var(--rope-amber);
+    padding-left: 1rem;
+    margin-left: 1rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--rope-amber);
+    color: var(--black);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: var(--rope-warm);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: transparent;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 1rem;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--rope-amber);
+    color: var(--rope-amber);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    writing-mode: vertical-rl;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--rope-amber), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ─── INTRO STRIP ─── */
+  .intro-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-top: 1px solid var(--grey-mid);
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .intro-strip-item {
+    padding: 2rem 2.5rem;
+    border-right: 1px solid var(--grey-mid);
+    text-align: center;
+  }
+
+  .intro-strip-item:last-child { border-right: none; }
+
+  .intro-strip-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--rope-amber);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .intro-strip-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ─── SECTION STYLES ─── */
+  section {
+    padding: 6rem 3rem;
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .section-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 600px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--rope-amber);
+  }
+
+  .section-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--rope-amber);
+    margin-top: 1.5rem;
+  }
+
+  /* ─── HOME GALLERY PREVIEW ─── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 260px 260px;
+    gap: 4px;
+  }
+
+  .gallery-grid .g-item {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-grid .g-item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery-grid .g-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%);
+    transition: filter 0.6s ease, transform 0.6s ease;
+  }
+
+  .gallery-grid .g-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+
+  /* ─── SERVICES PREVIEW GRID ─── */
+  .services-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%) brightness(0.6);
+    transition: all 0.6s ease;
+  }
+
+  .service-card:hover img {
+    filter: grayscale(20%) brightness(0.8);
+    transform: scale(1.05);
+  }
+
+  .service-card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 60%);
+  }
+
+  .service-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+
+  .service-card-desc {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--rope-amber);
+    text-transform: uppercase;
+  }
+
+  /* ─── NICK INTRO SECTION ─── */
+  .nick-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .nick-photo {
+    position: relative;
+  }
+
+  .nick-photo img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(30%);
+    display: block;
+  }
+
+  .nick-photo::after {
+    content: '';
+    position: absolute;
+    inset: -8px -8px 8px 8px;
+    border: 1px solid var(--rope-amber);
+    z-index: -1;
+  }
+
+  .nick-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(245,243,239,0.85);
+  }
+
+  /* ─── ABOUT PAGE ─── */
+  .about-hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem 3rem;
+    overflow: hidden;
+  }
+
+  .about-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://static.wixstatic.com/media/e836d2_939ff8870821440c9ec92f7a86624d27~mv2.jpeg/v1/fill/w_1400,h_1866,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_20190427_233633-01%20(Large).jpeg');
+    background-size: cover;
+    background-position: center 20%;
+    filter: grayscale(50%);
+  }
+
+  .about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.2) 100%);
+  }
+
+  .about-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .about-hero-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    color: var(--white);
+  }
+
+  .about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  .about-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .about-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: var(--rope-amber);
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(245,243,239,0.85);
+  }
+
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 5rem;
+    align-items: start;
+  }
+
+  .about-split img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    filter: grayscale(30%);
+    display: block;
+  }
+
+  .adhd-banner {
+    margin: 3rem 0;
+    padding: 2.5rem 3rem;
+    border-left: 3px solid var(--rope-amber);
+    background: rgba(200,135,42,0.05);
+  }
+
+  .adhd-banner h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--rope-amber);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── SERVICES PAGE ─── */
+  .services-page {
+    padding-top: 6rem;
+  }
+
+  .services-header {
+    padding: 5rem 3rem 3rem;
+    text-align: center;
+  }
+
+  .service-full {
+    display: none;
+    padding: 5rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .service-full.active { display: block; }
+
+  .service-full h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .service-full p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: rgba(245,243,239,0.85);
+  }
+
+  .services-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--grey-mid);
+    overflow-x: auto;
+    margin: 0 3rem;
+  }
+
+  .services-nav button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    margin-bottom: -1px;
+  }
+
+  .services-nav button:hover { color: var(--white); }
+
+  .services-nav button.active {
+    color: var(--rope-amber);
+    border-bottom-color: var(--rope-amber);
+  }
+
+  .service-hero-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    filter: grayscale(30%);
+    display: block;
+    margin-bottom: 3rem;
+  }
+
+  .back-to-services {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-bottom: 2rem;
+    font-family: 'Raleway', sans-serif;
+    transition: gap 0.3s;
+  }
+
+  .back-to-services:hover { gap: 0.8rem; }
+
+  /* ─── PRICING TABLE ─── */
+  .pricing-section {
+    background: var(--grey-mid);
+    padding: 4rem 3rem;
+    margin-top: 5rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 3rem;
+  }
+
+  .price-card {
+    background: var(--black);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .price-card:hover { transform: translateY(-4px); }
+
+  .price-card.featured {
+    background: var(--rope-dark);
+    border-top: 2px solid var(--rope-amber);
+  }
+
+  .price-card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--rope-amber);
+    color: var(--black);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    font-weight: 500;
+  }
+
+  .price-duration {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 0.8rem;
+  }
+
+  .price-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .price-amount span {
+    font-size: 1.2rem;
+    vertical-align: super;
+    margin-right: 0.1rem;
+    color: var(--rope-amber);
+  }
+
+  .price-per {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .price-includes {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .price-includes li {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    color: rgba(245,243,239,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .price-includes li::before {
+    content: '—';
+    color: var(--rope-amber);
+    flex-shrink: 0;
+  }
+
+  .price-poa {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--rope-amber);
+    font-style: italic;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ─── FAQ PAGE ─── */
+  .faq-page {
+    padding-top: 6rem;
+  }
+
+  .faq-header {
+    padding: 5rem 3rem 3rem;
+    max-width: 700px;
+  }
+
+  .faq-list {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 3rem 6rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--white);
+    padding: 2rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.3s;
+  }
+
+  .faq-question:hover { color: var(--rope-amber); }
+
+  .faq-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--grey-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    color: var(--rope-amber);
+    transition: all 0.3s;
+  }
+
+  .faq-item.open .faq-icon {
+    background: var(--rope-amber);
+    color: var(--black);
+    border-color: var(--rope-amber);
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s;
+  }
+
+  .faq-item.open .faq-answer { max-height: 600px; }
+
+  .faq-answer-inner {
+    padding-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(245,243,239,0.8);
+  }
+
+  /* ─── CONTACT PAGE ─── */
+  .contact-page {
+    padding-top: 6rem;
+    min-height: 100vh;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 6rem);
+  }
+
+  .contact-info {
+    padding: 5rem 4rem;
+    background: var(--grey-mid);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-info h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  .contact-detail {
+    margin-bottom: 2rem;
+  }
+
+  .contact-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-value {
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+
+  .contact-value a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-value a:hover { color: var(--rope-amber); }
+
+  .consent-notice {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid var(--grey-light);
+    background: rgba(200,135,42,0.05);
+  }
+
+  .consent-notice h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 0.8rem;
+  }
+
+  .consent-notice p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(245,243,239,0.7);
+  }
+
+  .contact-form-area {
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-form-area h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--grey-light);
+    color: var(--white);
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    padding: 0.7rem 0;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-bottom-color: var(--rope-amber);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-group select option { background: var(--black); }
+
+  .form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-checkbox input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--rope-amber);
+    margin-top: 0.15rem;
+  }
+
+  .form-checkbox label {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(245,243,239,0.7);
+    cursor: pointer;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+  }
+
+  .form-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--rope-amber);
+    margin-bottom: 1rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #050505;
+    border-top: 1px solid var(--grey-mid);
+    padding: 4rem 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rope-amber);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 0.7rem;
+  }
+
+  .footer-col ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  .footer-col ul li a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--grey-mid);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .footer-bottom-right {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-bottom-right a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-bottom-right a:hover { color: var(--white); }
+
+  /* ─── CONSENT MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.95);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 2rem;
+  }
+
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; padding-top: 5rem; }
+
+  .modal-box {
+    background: var(--grey-mid);
+    max-width: 700px;
+    width: 100%;
+    padding: 3rem;
+    position: relative;
+    border-top: 3px solid var(--rope-amber);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .modal-close:hover { color: var(--white); }
+
+  .modal-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--rope-amber);
+  }
+
+  .modal-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--white);
+  }
+
+  .modal-box p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,243,239,0.8);
+    margin-bottom: 1rem;
+  }
+
+  .modal-box ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(245,243,239,0.75);
+    line-height: 1.8;
+  }
+
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 99;
+    flex-direction: column;
+    padding: 6rem 3rem 3rem;
+    gap: 0;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--grey-mid);
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .mobile-menu a:hover { color: var(--rope-amber); }
+
+  .mobile-menu-sub {
+    padding-left: 1.5rem;
+  }
+
+  .mobile-menu-sub a {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+  }
+
+  /* ─── UTILITIES ─── */
+  .rope-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rope-amber), transparent);
+    margin: 4rem 0;
+  }
+
+  .text-amber { color: var(--rope-amber); }
+
+  .align-center { text-align: center; }
+
+  .max-narrow {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 4rem 1.5rem; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-grid .g-item:first-child { grid-column: 1 / -1; }
+    .services-preview { grid-template-columns: 1fr; }
+    .nick-intro { grid-template-columns: 1fr; gap: 3rem; }
+    .nick-photo img { height: 400px; }
+    .about-split { grid-template-columns: 1fr; }
+    .contact-layout { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .intro-strip { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .services-nav { margin: 0 1.5rem; }
+    .faq-list { padding: 2rem 1.5rem 4rem; }
+    .service-full { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="navigate('home')">
+    FREESTYLE ROPE ART
+    <span>Nick Pearson · Est. 2007</span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="navigate('home')">Home</a></li>
+    <li><a onclick="navigate('about')">About</a></li>
+    <li class="services-parent">
+      <a onclick="navigate('services', 'all')">Services ↓</a>
+      <div class="services-dropdown">
+        <a onclick="navigate('services','just-ropes')">Just Ropes</a>
+        <a onclick="navigate('services','more-than-ropes')">More Than Ropes</a>
+        <a onclick="navigate('services','therapy')">Therapy</a>
+        <a onclick="navigate('services','projects')">Projects & Adventures</a>
+        <a onclick="navigate('services','events')">Events & Performances</a>
+        <a onclick="navigate('services','furniture')">Furniture & Sculptures</a>
+      </div>
+    </li>
+    <li><a onclick="navigate('pricing')">Pricing</a></li>
+    <li><a onclick="navigate('faq')">FAQ</a></li>
+    <li><a onclick="navigate('contact')" class="nav-contact-btn">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="navigate('home'); closeMobileMenu()">Home</a>
+  <a onclick="navigate('about'); closeMobileMenu()">About</a>
+  <a onclick="navigate('services','all'); closeMobileMenu()">Services</a>
+  <div class="mobile-menu-sub">
+    <a onclick="navigate('services','just-ropes'); closeMobileMenu()">Just Ropes</a>
+    <a onclick="navigate('services','more-than-ropes'); closeMobileMenu()">More Than Ropes</a>
+    <a onclick="navigate('services','therapy'); closeMobileMenu()">Therapy</a>
+    <a onclick="navigate('services','projects'); closeMobileMenu()">Projects & Adventures</a>
+    <a onclick="navigate('services','events'); closeMobileMenu()">Events & Performances</a>
+    <a onclick="navigate('services','furniture'); closeMobileMenu()">Furniture & Sculptures</a>
+  </div>
+  <a onclick="navigate('pricing'); closeMobileMenu()">Pricing</a>
+  <a onclick="navigate('faq'); closeMobileMenu()">FAQ</a>
+  <a onclick="navigate('contact'); closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ═══════════════════════════════ HOME PAGE ═══════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Newbury, Berkshire, UK · Est. 2007</div>
+      <h1 class="hero-title">
+        Art.<br>
+        <em>Touch.</em><br>
+        Connection.
+      </h1>
+      <div class="hero-tagline">
+        Freestyle Rope Art
+        <span>Intimacy · Presence · Transformation</span>
+      </div>
+      <button class="btn-primary" onclick="navigate('about')">Discover More</button>
+      <button class="btn-outline" onclick="navigate('contact')">Book a Session</button>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="intro-strip">
+    <div class="intro-strip-item">
+      <div class="intro-strip-num">17+</div>
+      <div class="intro-strip-label">Years of Practice</div>
+    </div>
+    <div class="intro-strip-item">
+      <div class="intro-strip-num">∞</div>
+      <div class="intro-strip-label">Unique Ties — No Two the Same</div>
+    </div>
+    <div class="intro-strip-item">
+      <div class="intro-strip-num">6</div>
+      <div class="intro-strip-label">Service Offerings</div>
+    </div>
+    <div class="intro-strip-item">
+      <div class="intro-strip-num">100%</div>
+      <div class="intro-strip-label">Freestyle · Never Repeated</div>
+    </div>
+  </div>
+
+  <!-- NICK INTRO -->
+  <section style="background: var(--black);">
+    <div class="nick-intro">
+      <div class="nick-photo">
+        <img src="https://static.wixstatic.com/media/e836d2_0f7750b07ad94cc28ad7103a4ed3d060~mv2.jpg/v1/fill/w_980,h_1470,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_0023%20(Large)_JPG.jpg"
+          alt="Nick Pearson — Freestyle Rope Art" loading="lazy">
+      </div>
+      <div class="nick-text">
+        <span class="section-eyebrow">Hi, I'm Nick</span>
+        <h2 class="section-title">Painting with ropes<br><em>since mid 2007</em></h2>
+        <div class="section-rule"></div>
+        <br>
+        <p>My practice focuses on connection: ropes are my vehicle to connect our energy using sensual touch, which are the medium to communicate at a deeper more meaningful level.</p>
+        <p>My sessions aim to accompany you into a meditative state of calmness. With every brush of rope on your skin, with every touch, word and movement, I guide you into a deeper state of calmness, where your heart rate slows and you can feel fully safe and at peace.</p>
+        <p>Ultimately, I want you to get to a point where you don't feel anything at all and you find yourself in a permanent suspension between life's problems and deep meditation.</p>
+        <br>
+        <button class="btn-primary" onclick="navigate('about')">My Full Story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section style="background: var(--grey-mid); padding-top: 5rem;">
+    <div class="section-header">
+      <span class="section-eyebrow">A Glimpse of the Work</span>
+      <h2 class="section-title">Every tie is <em>new</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item">
+        <img src="https://static.wixstatic.com/media/e836d2_086f58a0cb1344d0b4e80de4e6d49518~mv2.jpg/v1/fill/w_980,h_1526,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_20180731_122126.jpg" alt="Rope Art" loading="lazy">
+      </div>
+      <div class="g-item">
+        <img src="https://static.wixstatic.com/media/7c5c84_60dbe7de0b9d43b9b7c9bdf47bbb3903~mv2.jpeg/v1/fill/w_480,h_480,q_90,enc_avif,quality_auto/7c5c84_60dbe7de0b9d43b9b7c9bdf47bbb3903~mv2.jpeg" alt="Rope Art" loading="lazy">
+      </div>
+      <div class="g-item">
+        <img src="https://static.wixstatic.com/media/7c5c84_aa9d2443708c466b91b24d6160cb7908~mv2.jpeg/v1/fill/w_480,h_480,q_90,enc_avif,quality_auto/7c5c84_aa9d2443708c466b91b24d6160cb7908~mv2.jpeg" alt="Rope Art" loading="lazy">
+      </div>
+      <div class="g-item">
+        <img src="https://static.wixstatic.com/media/7c5c84_af7300358aa6436fb656e0c26bf2ca8b~mv2.jpeg/v1/fill/w_480,h_480,q_90,enc_avif,quality_auto/7c5c84_af7300358aa6436fb656e0c26bf2ca8b~mv2.jpeg" alt="Rope Art" loading="lazy">
+      </div>
+      <div class="g-item">
+        <img src="https://static.wixstatic.com/media/7c5c84_881c5af0853048eabb005655f99f0139~mv2.jpeg/v1/fill/w_480,h_480,q_90,enc_avif,quality_auto/7c5c84_881c5af0853048eabb005655f99f0139~mv2.jpeg" alt="Rope Art" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section>
+    <div class="section-header">
+      <span class="section-eyebrow">What I Offer</span>
+      <h2 class="section-title">Six ways to <em>experience</em> the rope</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="services-preview">
+      <div class="service-card" onclick="navigate('services','just-ropes')">
+        <img src="https://static.wixstatic.com/media/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg/v1/fill/w_929,h_889,al_c,q_85,enc_avif,quality_auto/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg" alt="Just Rope Art" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">Just Rope Art</div>
+          <div class="service-card-desc">The Core Experience</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="navigate('services','more-than-ropes')">
+        <img src="https://static.wixstatic.com/media/7c5c84_6c1446e985784f0eb06cea0f465dffb3~mv2.jpeg/v1/fill/w_980,h_644,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20200815_232334-04_50q_50r_wm.jpeg" alt="More Than Ropes" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">More Than Ropes</div>
+          <div class="service-card-desc">Deeper Exploration</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="navigate('services','therapy')">
+        <img src="https://static.wixstatic.com/media/7c5c84_e788efdd6eb44264802266bf47b5b255~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/positive_thinking_bricks_50q_50r_wm_edited.jpg" alt="Therapy" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">Therapy</div>
+          <div class="service-card-desc">Healing Through Rope</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="navigate('services','projects')">
+        <img src="https://static.wixstatic.com/media/7c5c84_f75ac14a06c74e8cb87375fbc32414ee~mv2.jpg/v1/fill/w_705,h_954,al_c,q_85,enc_avif,quality_auto/20210605_152957_resize_crop_compress.jpg" alt="Projects" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">Projects & Adventures</div>
+          <div class="service-card-desc">Bespoke Collaborations</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="navigate('services','events')">
+        <img src="https://static.wixstatic.com/media/7c5c84_1e94541799e3400688b634d10656dabb~mv2.jpg/v1/fill/w_980,h_1192,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20190627_100506_crop_portrait_compress.jpg" alt="Events" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">Events & Performances</div>
+          <div class="service-card-desc">Live Rope Art</div>
+        </div>
+      </div>
+      <div class="service-card" onclick="navigate('services','furniture')">
+        <img src="https://static.wixstatic.com/media/7c5c84_228b28510b4b400a879cd8defc56890b~mv2.jpg/v1/fill/w_671,h_1087,al_c,q_85,enc_avif,quality_auto/IMAG5040_resize_crop_compress.jpg" alt="Furniture" loading="lazy">
+        <div class="service-card-content">
+          <div class="service-card-title">Furniture & Sculptures</div>
+          <div class="service-card-desc">Rope as Object</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section style="background: var(--rope-dark); text-align: center; padding: 5rem 3rem;">
+    <span class="section-eyebrow">Ready to Experience Something Different?</span>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin: 1rem 0 2rem;">Your escape from the everyday<br><em>starts with a conversation.</em></h2>
+    <button class="btn-primary" onclick="navigate('contact')">Get in Touch</button>
+    <button class="btn-outline" onclick="navigate('faq')">Read the FAQ First</button>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════ ABOUT PAGE ═══════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-text">
+      <h1>..this is an Ai podcast, generated from over a decade of the wonderful humans I have met & tied within my rope art..</h1>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <h2>The Journey to Calm</h2>
+    <p>My sessions aim to accompany you into a meditative state of calmness. With every brush of rope on your skin, with every touch, word and movement, I guide you into a deeper state of calmness, where your heart rate slows and you can feel fully safe and at peace.</p>
+    <p>Ultimately, I want you to get to a point where you don't feel anything at all and you find yourself in a permanent suspension between life's problems and deep meditation.</p>
+    <p>People have started to call me a "time vortex" because time moves at a different speed around me until, eventually, it completely evaporates and you feel free and safe to let go.</p>
+
+    <div class="rope-divider"></div>
+
+    <div class="adhd-banner">
+      <h3>Therapeutic Hyperfocus</h3>
+      <p>Rope is not only therapeutic for the person being tied, but it is extremely therapeutic for me: as someone with ADHD, my head is constantly racing, all day. When I am tying someone up, my head slows down, my brain enters a state of calm and it shows me that I am able to focus on just one thing: the care of the person or sculpture in front of me. This is one of the many reasons that make my connection with you with my ropes so unique: I need to connect with you so I can stay fully focused on you and get my undivided attention throughout the session (ever heard of ADHD hyperfocus?)</p>
+      <p>With me, every project, event, therapy, sculpture and tie is new, a new experience over and over again, where I get to fully express my creativity whilst guiding you through your own journey of self-discovery.</p>
+    </div>
+
+    <div class="about-split">
+      <div>
+        <h2>Hi! I'm Nick</h2>
+        <p>Painting with ropes and practicing the "Art of Touch" since mid 2007.</p>
+        <p>My practice focuses on connection: ropes are my vehicle to connect our energy using sensual touch, which are the medium to communicate at a deeper more meaningful level.</p>
+        <p>I am self-taught in Rope art, taking cues and inspiration from traditional Japanese Rope Bondage methods and techniques. I focus, however, on a more freestyle approach that maximises the art of touch and sensuality. As such, I don't focus on the rigid knots, ties and suspension methods of the traditional forms — I find these can limit the expression and feelings of touch within a session.</p>
+        <p>So you will not get a traditional shibari-type session from me, but you will experience a world of sensuality and euphoria that will leave you wanting more.</p>
+        <br>
+        <button class="btn-primary" onclick="navigate('contact')">Book a Session</button>
+      </div>
+      <div>
+        <img src="https://static.wixstatic.com/media/e836d2_939ff8870821440c9ec92f7a86624d27~mv2.jpeg/v1/fill/w_980,h_1307,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_20190427_233633-01%20(Large).jpeg" alt="Nick Pearson" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SERVICES PAGE ═══════════════════════════════ -->
+<div id="page-services" class="page services-page">
+  <div class="services-header">
+    <span class="section-eyebrow">What I Offer</span>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300;">Every session is <em>unique.</em></h1>
+  </div>
+
+  <!-- Services Tab Nav -->
+  <div class="services-nav">
+    <button class="active" onclick="showService('all', this)">Overview</button>
+    <button onclick="showService('just-ropes', this)">Just Ropes</button>
+    <button onclick="showService('more-than-ropes', this)">More Than Ropes</button>
+    <button onclick="showService('therapy', this)">Therapy</button>
+    <button onclick="showService('projects', this)">Projects & Adventures</button>
+    <button onclick="showService('events', this)">Events & Performances</button>
+    <button onclick="showService('furniture', this)">Furniture & Sculptures</button>
+  </div>
+
+  <!-- ALL OVERVIEW -->
+  <div id="svc-all" class="service-full active" style="max-width: 100%; padding: 4rem 3rem;">
+    <div class="services-preview">
+      <div class="service-card" onclick="showService('just-ropes', document.querySelector('.services-nav button:nth-child(2)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg/v1/fill/w_929,h_889,al_c,q_85,enc_avif,quality_auto/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg" alt="Just Rope Art" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">Just Rope Art</div><div class="service-card-desc">The Core Experience</div></div>
+      </div>
+      <div class="service-card" onclick="showService('more-than-ropes', document.querySelector('.services-nav button:nth-child(3)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_6c1446e985784f0eb06cea0f465dffb3~mv2.jpeg/v1/fill/w_980,h_644,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20200815_232334-04_50q_50r_wm.jpeg" alt="More Than Ropes" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">More Than Ropes</div><div class="service-card-desc">Deeper Exploration</div></div>
+      </div>
+      <div class="service-card" onclick="showService('therapy', document.querySelector('.services-nav button:nth-child(4)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_e788efdd6eb44264802266bf47b5b255~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/positive_thinking_bricks_50q_50r_wm_edited.jpg" alt="Therapy" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">Therapy</div><div class="service-card-desc">Healing Through Rope</div></div>
+      </div>
+      <div class="service-card" onclick="showService('projects', document.querySelector('.services-nav button:nth-child(5)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_f75ac14a06c74e8cb87375fbc32414ee~mv2.jpg/v1/fill/w_705,h_954,al_c,q_85,enc_avif,quality_auto/20210605_152957_resize_crop_compress.jpg" alt="Projects" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">Projects & Adventures</div><div class="service-card-desc">Bespoke Collaborations</div></div>
+      </div>
+      <div class="service-card" onclick="showService('events', document.querySelector('.services-nav button:nth-child(6)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_1e94541799e3400688b634d10656dabb~mv2.jpg/v1/fill/w_980,h_1192,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20190627_100506_crop_portrait_compress.jpg" alt="Events" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">Events & Performances</div><div class="service-card-desc">Live Rope Art</div></div>
+      </div>
+      <div class="service-card" onclick="showService('furniture', document.querySelector('.services-nav button:nth-child(7)'))">
+        <img src="https://static.wixstatic.com/media/7c5c84_228b28510b4b400a879cd8defc56890b~mv2.jpg/v1/fill/w_671,h_1087,al_c,q_85,enc_avif,quality_auto/IMAG5040_resize_crop_compress.jpg" alt="Furniture" loading="lazy">
+        <div class="service-card-content"><div class="service-card-title">Furniture & Sculptures</div><div class="service-card-desc">Rope as Object</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUST ROPES -->
+  <div id="svc-just-ropes" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg/v1/fill/w_929,h_889,al_c,q_85,enc_avif,quality_auto/7c5c84_20bd1a64fa134e30a9b49b31406998f6~mv2.jpg" alt="Just Rope Art">
+    <h1>Just Rope Art</h1>
+    <p>Introducing you to Freestyle Rope Art and The Art of Touch</p>
+    <p>Creating beautiful, colourful, living artwork, using a sensual and holistic approach that combines music, lighting, scents and non-intimate touch to create a truly unique feeling of peace</p>
+    <p>My freestyle approach means no tie is ever the same; I adapt to every model and just let the creativity flow in the moment. However, I am happy to accommodate requests on a 'commission' basis if you have a specific idea you'd like me to bring to life</p>
+    <p>Rope artwork can be created anywhere, from my own studio, to your home, to outdoors in the breeze and sunshine</p>
+    <p>Couples are welcomed — whether you would like to be tied together, or if one of you would prefer to watch, rope art creates an intimate experience together, to embrace and enhance your connection</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Book This Experience</button>
+    <button class="btn-outline" onclick="navigate('pricing')">View Pricing</button>
+  </div>
+
+  <!-- MORE THAN ROPES -->
+  <div id="svc-more-than-ropes" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_6c1446e985784f0eb06cea0f465dffb3~mv2.jpeg/v1/fill/w_980,h_644,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20200815_232334-04_50q_50r_wm.jpeg" alt="More Than Ropes">
+    <h1>More Than Ropes</h1>
+    <p>A deeper exploration that takes the rope experience further. During a session, I am very open to discussions of the feelings and kinks that are brought to mind, and I encourage you to explore your desires and needs in a safe environment.</p>
+    <p>This said, during an established and agreed session for what will happen, I would prefer that we stick to this to meet expectations. Should anything more be desired, I am very willing to explore this in a follow-on session where we can discuss what you are expecting to experience beforehand and ensure that all the necessary requirements and accessories are available.</p>
+    <p>All sessions are built on consent, communication, and trust. Your boundaries are always respected and celebrated.</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Discuss Your Session</button>
+  </div>
+
+  <!-- THERAPY -->
+  <div id="svc-therapy" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_e788efdd6eb44264802266bf47b5b255~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/positive_thinking_bricks_50q_50r_wm_edited.jpg" alt="Rope Therapy">
+    <h1>Therapy</h1>
+    <p>Rope as therapy goes beyond aesthetics. It is about arriving at stillness — a place where the weight of the world is held by something other than you for a while.</p>
+    <p>This includes Unconventional Brick Therapy — a complementary modality that works alongside rope to help ground the mind and body. Every session is tailored to your individual needs, pace, and emotional landscape.</p>
+    <p>For those navigating stress, anxiety, sensory needs, or simply seeking a structured escape from the pace of daily life — this space is for you. Everything discussed and experienced in session is held in complete confidence.</p>
+    <p>Please mention any health conditions, medications, or emotional context during our initial consultation so I can tailor the session appropriately for your safety and benefit.</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Start a Conversation</button>
+  </div>
+
+  <!-- PROJECTS & ADVENTURES -->
+  <div id="svc-projects" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_f75ac14a06c74e8cb87375fbc32414ee~mv2.jpg/v1/fill/w_705,h_954,al_c,q_85,enc_avif,quality_auto/20210605_152957_resize_crop_compress.jpg" alt="Projects and Adventures">
+    <h1>Projects & Adventures</h1>
+    <p>Where rope art meets the wider world. Projects and Adventures covers bespoke collaborations — taking the practice outdoors, into unusual locations, or combining it with other creative disciplines.</p>
+    <p>Rope artwork can be created anywhere, from my own studio, to your home, to outdoors in the breeze and sunshine. I welcome interesting proposals and creative partnerships.</p>
+    <p>If you have an idea — however unconventional — let's talk about it. The most memorable sessions are always the ones nobody planned entirely.</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Propose a Project</button>
+  </div>
+
+  <!-- EVENTS & PERFORMANCES -->
+  <div id="svc-events" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_1e94541799e3400688b634d10656dabb~mv2.jpg/v1/fill/w_980,h_1192,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/20190627_100506_crop_portrait_compress.jpg" alt="Events and Performances">
+    <h1>Events & Performances</h1>
+    <p>Live rope art performance at private events, parties, exhibitions, and club nights. This is where the practice becomes spectacle — where the act of tying becomes something audiences can witness and feel.</p>
+    <p>Performances can be tailored to your event's theme, audience, and atmosphere. I bring the ropes, the creativity, the safety, and the presence. You provide the space and the people.</p>
+    <p>I much prefer to perform and make people feel safe in rope as an escape from their daily life problems. This is where my love truly lives.</p>
+    <p>To ensure the session is appropriately planned for the right number of people attending, please get in touch during our initial consultation so the event can be organised in a way that allows everyone to enjoy it.</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Enquire About Events</button>
+  </div>
+
+  <!-- FURNITURE & SCULPTURES -->
+  <div id="svc-furniture" class="service-full">
+    <img class="service-hero-img" src="https://static.wixstatic.com/media/7c5c84_228b28510b4b400a879cd8defc56890b~mv2.jpg/v1/fill/w_671,h_1087,al_c,q_85,enc_avif,quality_auto/IMAG5040_resize_crop_compress.jpg" alt="Furniture and Sculptures">
+    <h1>Furniture & Sculptures</h1>
+    <p>Rope as object. Rope transformed into furniture, wearable art, and sculptural forms that carry the same intention as a session — tension, beauty, and the intelligence of material.</p>
+    <p>Every piece is handmade and unique. Whether you are looking for a statement sculpture, a functional rope piece for your home, or a bespoke commission, I approach each creation with the same care and craftsmanship as every tie.</p>
+    <p>Please get in touch to discuss your vision and we can explore what's possible together.</p>
+    <br>
+    <button class="btn-primary" onclick="navigate('contact')">Commission a Piece</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PRICING PAGE ═══════════════════════════════ -->
+<div id="page-pricing" class="page" style="padding-top: 8rem;">
+  <div style="padding: 2rem 3rem 3rem; max-width: 800px;">
+    <span class="section-eyebrow">Investment in Your Experience</span>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; margin-bottom: 1rem;">Pricing &amp; Sessions</h1>
+    <div class="section-rule"></div>
+    <p style="margin-top: 1.5rem; color: rgba(245,243,239,0.7); font-size: 0.95rem; line-height: 1.8;">All sessions include a pre-session consultation, all equipment, and my full undivided attention. Sessions take place at my studio in Newbury, your home, or an agreed location. Please read the FAQ and contact me before booking if you have any questions.</p>
+  </div>
+
+  <div class="pricing-section">
+    <div style="padding: 0 3rem;">
+      <span class="section-eyebrow">Private Sessions</span>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300;">One-to-One Rope Art</h2>
+    </div>
+    <div class="pricing-grid" style="max-width: 1200px; margin: 2rem auto 0;">
+      <div class="price-card">
+        <div class="price-duration">2 Hours</div>
+        <div class="price-name">Introduction Session</div>
+        <div class="price-amount"><span>£</span>500</div>
+        <div class="price-per">Per Session</div>
+        <ul class="price-includes">
+          <li>Pre-session consultation</li>
+          <li>Full freestyle tie</li>
+          <li>Music, lighting & scents</li>
+          <li>Photography available</li>
+        </ul>
+        <button class="btn-primary" onclick="navigate('contact')" style="width: 100%; text-align: center;">Book Now</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-duration">3 Hours</div>
+        <div class="price-name">Extended Session</div>
+        <div class="price-amount"><span>£</span>750</div>
+        <div class="price-per">Per Session</div>
+        <ul class="price-includes">
+          <li>Everything in Introduction</li>
+          <li>More time to go deeper</li>
+          <li>Multiple ties possible</li>
+          <li>Post-session debrief</li>
+        </ul>
+        <button class="btn-primary" onclick="navigate('contact')" style="width: 100%; text-align: center;">Book Now</button>
+      </div>
+      <div class="price-card">
+        <div class="price-duration">4+ Hours</div>
+        <div class="price-name">Half Day Immersion</div>
+        <div class="price-amount"><span>£</span>1,000</div>
+        <div class="price-per">Per Session</div>
+        <ul class="price-includes">
+          <li>Full immersive experience</li>
+          <li>Multiple styles & ties</li>
+          <li>Perfect for deeper journeys</li>
+          <li>Full photography set</li>
+        </ul>
+        <button class="btn-primary" onclick="navigate('contact')" style="width: 100%; text-align: center;">Book Now</button>
+      </div>
+    </div>
+
+    <div class="pricing-grid" style="max-width: 1200px; margin: 2px auto 0;">
+      <div class="price-card">
+        <div class="price-duration">4 Hours</div>
+        <div class="price-name">Couples or Collaborative Experience</div>
+        <div class="price-amount"><span>£</span>1,000</div>
+        <div class="price-per">Per Session — 2 People</div>
+        <ul class="price-includes">
+          <li>Tied together or one watches</li>
+          <li>Enhances connection</li>
+          <li>Shared journey</li>
+          <li>Full photography</li>
+        </ul>
+        <button class="btn-primary" onclick="navigate('contact')" style="width: 100%; text-align: center;">Book Now</button>
+      </div>
+      <div class="price-card">
+        <div class="price-duration">Price on Application</div>
+        <div class="price-name">Events & Performances</div>
+        <div class="price-poa">POA</div>
+        <div class="price-per">Tailored to Your Event</div>
+        <ul class="price-includes">
+          <li>Private parties & events</li>
+          <li>Club nights & exhibitions</li>
+          <li>Bespoke performance design</li>
+          <li>Travel available</li>
+        </ul>
+        <button class="btn-outline" onclick="navigate('contact')" style="width: 100%; text-align: center; margin-top: 0.5rem;">Enquire</button>
+      </div>
+      <div class="price-card">
+        <div class="price-duration">Price on Application</div>
+        <div class="price-name">Projects, Adventures & Sculptures</div>
+        <div class="price-poa">POA</div>
+        <div class="price-per">Discussed in Consultation</div>
+        <ul class="price-includes">
+          <li>Outdoor shoots & locations</li>
+          <li>Rope furniture & sculpture</li>
+          <li>Collaborative projects</li>
+          <li>Therapy sessions</li>
+        </ul>
+        <button class="btn-outline" onclick="navigate('contact')" style="width: 100%; text-align: center; margin-top: 0.5rem;">Enquire</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSENT SECTION -->
+  <section style="max-width: 860px; margin: 0 auto;">
+    <span class="section-eyebrow">Before We Begin</span>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2rem;">Consent, Safety & What to Expect</h2>
+    <p style="color: rgba(245,243,239,0.8); line-height: 1.9; margin-bottom: 1.5rem;">Every session begins with a consultation. Your safety, comfort, and agency are non-negotiable. Nothing happens without your express consent, and you are always free to slow down, pause, or stop entirely at any point.</p>
+    <p style="color: rgba(245,243,239,0.8); line-height: 1.9; margin-bottom: 2rem;">Please read the following important information before booking:</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <button onclick="openModal('consent-health')" class="btn-outline" style="text-align: center;">Health & Medications Consent</button>
+      <button onclick="openModal('consent-photos')" class="btn-outline" style="text-align: center;">Photography Policy</button>
+      <button onclick="openModal('consent-safety')" class="btn-outline" style="text-align: center;">Safety Information</button>
+      <button onclick="openModal('consent-session')" class="btn-outline" style="text-align: center;">What to Expect in a Session</button>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════ FAQ PAGE ═══════════════════════════════ -->
+<div id="page-faq" class="page faq-page">
+  <div class="faq-header" style="padding: 5rem 3rem 2rem;">
+    <span class="section-eyebrow">Frequently Asked Questions</span>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300;">Everything you need<br><em>to know before you book.</em></h1>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q1 — Do I have to mention any health conditions or medications for awareness?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Yes, please make me aware of any conditions or medications that will have an impact on your session, this is for your safety. This is especially important if anything you are on impacts your blood pressure or you have mobility issues.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q2 — What clothing should I wear for a session?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">There is no specific dress code for a session, I would advise that you wear something you find comfortable and loose to and from the session. During a session, please choose clothing that you are comfortable in, potentially being pictured in (if so requested) and that allows you to feel the rope against your skin.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q3 — Can there be more than myself in a session? Can I bring a partner or a group?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Yes, I welcome couples, throuples and groups — all are welcome. To ensure the session is appropriately planned for the right number of people attending, please discuss with me during our initial consultation, so the session can be organised in a way that allows everyone to enjoy it.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q4 — How long is a session on average?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">The average sessions can last between 2 to 3 hours once you arrive, please do ensure that you plan enough time to enjoy the session without any need to rush, and to clean up, get dressed at the end. While this is an average amount of time, sessions can be longer per request, or should the unexpected happen, again, depending on your needs during the day, for travel or other issues, please do plan carefully.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q5 — Rope and more — the kinkier side
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">During a session, I am very open to discussions of the feelings and kinks that are brought to mind, and I encourage you to explore your desires and needs in a safe environment. This said, during an established and agreed session for what will happen, I would prefer that we stick to this to meet expectations, should anything more be desired, I am very willing to explore this in a follow on session where we can discuss what you are expecting to experience before hand and ensure that all the necessary requirements and accessories are available.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q6 — Photos: can these be taken during a session, and how would that happen?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">To ensure everyone's dignity and privacy, the preferred solution is that all photos are taken by myself with my camera and video equipment. This can ensure that everyone can have faces hidden or obscured, or any identifying marks covered or not recorded if required. I have masks and can place equipment over tattoos (as an example).<br><br>I would strongly discourage the use of personal devices to take photos or video during a session, as when using these, the results could be suboptimal; however, during sessions with more than 1 person, I would happily encourage the other parties to take pictures with my equipment once set up.<br><br>At the end of a session, the unedited versions of pictures will be provided to you so you can have them edited yourself if required.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q7 — How did you learn Rope Art?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">I am self-taught in Rope art, taking cues and inspiration from traditional Japanese Rope Bondage methods and techniques. I focus, however, on a more freestyle approach that maximises the art of touch and sensuality. As such, I don't focus on the rigid knots, ties and suspension methods of the traditional forms, I find these can limit the expression and feelings of touch within a session.<br><br>So you will not get a traditional shibari-type session from me, but you will experience a world of sensuality and euphoria that will leave you wanting more.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Q8 — Safety
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">In everything I do safety of everyone involved is very important; this is why mentioning medical conditions and medications is important. Regarding the issue of tying and knots, I have spent a long time learning the ties and knots that are safe to use, where to use them and how to tie them in a manner that should ensure safety and the ability for quick release if needed. This also includes where to use specific types of restraints on the body to avoid creating any potential pinch points. The unexpected, however, can't be planned for and should 100% absolutely mentioned immediately if you have any loss of sensation or feelings of numbness or "pins and needles". I always have safety equipment on hand to speedily release you from any situation.<br><br>Please also practice good personal safety rules, ensure others know what you are doing, where you are going and your plans for travelling back safely. I would encourage everyone to do so in all situations as a basic measure.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ CONTACT PAGE ═══════════════════════════════ -->
+<div id="page-contact" class="page contact-page">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h1>Let's create<br><em style="font-style: italic; color: var(--rope-amber);">something</em><br>together.</h1>
+
+      <div class="contact-detail">
+        <div class="contact-label">Phone</div>
+        <div class="contact-value"><a href="tel:+447733323547">+44 7733 323 547</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:FreestyleRopeArt@Gmail.Com">FreestyleRopeArt@Gmail.Com</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-label">Location</div>
+        <div class="contact-value">Newbury, West Berkshire<br>England, RG14, UK</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-label">Follow the Work</div>
+        <div class="contact-value">
+          <a href="https://www.facebook.com/MrNickPearson" target="_blank" rel="noopener">Facebook</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.instagram.com/freestyleropeart/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="consent-notice">
+        <h4>Before You Book</h4>
+        <p>All sessions begin with a no-obligation consultation. Please have a read of the FAQ and feel free to ask anything. Your privacy, safety and comfort are always the first priority.</p>
+      </div>
+    </div>
+
+    <div class="contact-form-area">
+      <h2>Send a Message</h2>
+
+      <!-- Formspree success message — shown automatically by the library -->
+      <div data-fs-success style="display:none" class="form-success">
+        <h3>Thank you.</h3>
+        <p>Your message has been sent. Nick will be in touch within 48 hours to arrange an initial consultation.</p>
+      </div>
+
+      <!-- Formspree top-level error (e.g. network failure) -->
+      <div data-fs-error style="display:none; margin-bottom:1rem; color:#e07a5f; font-size:0.85rem; line-height:1.5;"></div>
+
+      <!-- Consent error — shown by our custom pre-validation -->
+      <div id="consent-error" style="display:none; margin-bottom:1rem; padding:0.8rem 1rem; border-left:3px solid #e07a5f; background:rgba(224,122,95,0.08); color:#e07a5f; font-size:0.85rem; line-height:1.5;">
+        Please tick all three consent boxes before sending.
+      </div>
+
+      <form id="fra-contact" novalidate>
+
+        <!-- Hidden subject line — Formspree uses this as the email subject -->
+        <input type="hidden" name="_subject" value="New enquiry — FreestyleRopeArt.com">
+
+        <div class="form-group">
+          <label for="fra-name">Your Name *</label>
+          <input type="text" id="fra-name" name="name"
+                 placeholder="First and last name"
+                 data-fs-field required>
+          <span data-fs-error="name" style="font-size:0.75rem; color:#e07a5f;"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="fra-email">Email Address *</label>
+          <input type="email" id="fra-email" name="email"
+                 placeholder="your@email.com"
+                 data-fs-field required>
+          <span data-fs-error="email" style="font-size:0.75rem; color:#e07a5f;"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="fra-phone">Phone Number</label>
+          <input type="tel" id="fra-phone" name="phone"
+                 placeholder="+44..."
+                 data-fs-field>
+        </div>
+
+        <div class="form-group">
+          <label for="fra-service">Interested In</label>
+          <select id="fra-service" name="service" data-fs-field>
+            <option value="">Select a service...</option>
+            <option>Just Rope Art</option>
+            <option>More Than Ropes</option>
+            <option>Therapy</option>
+            <option>Couples / Collaborative</option>
+            <option>Events &amp; Performances</option>
+            <option>Projects &amp; Adventures</option>
+            <option>Furniture &amp; Sculptures</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fra-message">Your Message *</label>
+          <textarea id="fra-message" name="message"
+                    placeholder="Tell me a little about yourself and what you're looking for..."
+                    data-fs-field required></textarea>
+          <span data-fs-error="message" style="font-size:0.75rem; color:#e07a5f;"></span>
+        </div>
+
+        <div class="form-checkbox">
+          <input type="checkbox" id="fconsent1">
+          <label for="fconsent1">I confirm I am 18 years of age or older and I am enquiring of my own free will.</label>
+        </div>
+        <div class="form-checkbox">
+          <input type="checkbox" id="fconsent2">
+          <label for="fconsent2">I understand that a pre-session consultation will take place before any session is confirmed, and that I can stop or withdraw at any time.</label>
+        </div>
+        <div class="form-checkbox">
+          <input type="checkbox" id="fconsent3">
+          <label for="fconsent3">I consent to Nick Pearson contacting me via the details I have provided in response to this enquiry.</label>
+        </div>
+
+        <br>
+        <button type="submit" data-fs-submit-btn class="btn-primary"
+                style="width:100%; text-align:center; opacity:1; transition:opacity 0.3s;">
+          Send Enquiry
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER (shown on all pages) ─── -->
+<footer id="siteFooter">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3 style="color: var(--rope-amber);">FREESTYLE<br>ROPE ART</h3>
+      <p>Contemporary rope art, therapy, performance and sculpture by Nick Pearson. Based in Newbury, Berkshire. Practice since 2007.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a onclick="navigate('home')">Home</a></li>
+        <li><a onclick="navigate('about')">About</a></li>
+        <li><a onclick="navigate('services','all')">Services</a></li>
+        <li><a onclick="navigate('pricing')">Pricing</a></li>
+        <li><a onclick="navigate('faq')">FAQ</a></li>
+        <li><a onclick="navigate('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a onclick="navigate('services','just-ropes')">Just Rope Art</a></li>
+        <li><a onclick="navigate('services','more-than-ropes')">More Than Ropes</a></li>
+        <li><a onclick="navigate('services','therapy')">Therapy</a></li>
+        <li><a onclick="navigate('services','projects')">Projects & Adventures</a></li>
+        <li><a onclick="navigate('services','events')">Events & Performances</a></li>
+        <li><a onclick="navigate('services','furniture')">Furniture & Sculptures</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+447733323547">+44 7733 323 547</a></li>
+        <li><a href="mailto:FreestyleRopeArt@Gmail.Com">FreestyleRopeArt@Gmail.Com</a></li>
+        <li><a>Newbury, West Berks, UK</a></li>
+        <li><a href="https://www.facebook.com/MrNickPearson" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/freestyleropeart/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 FreestyleRopeArt.com — Nick Pearson. All rights reserved.</span>
+    <div class="footer-bottom-right">
+      <a onclick="openModal('consent-safety')">Safety Policy</a>
+      <a onclick="openModal('consent-photos')">Photography Policy</a>
+      <a onclick="navigate('faq')">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ MODALS ═══════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  // ─── NAVIGATION ───
+  const pages = ['home','about','services','pricing','faq','contact'];
+
+  function navigate(page, sub) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) el.classList.remove('active');
+    });
+    const target = document.getElementById('page-' + page);
+    if (target) target.classList.add('active');
+    window.scrollTo(0, 0);
+
+    if (page === 'services' && sub) {
+      showService(sub, null);
+    } else if (page === 'services') {
+      showService('all', null);
+    }
+
+    updateNavScroll();
+  }
+
+  // ─── SERVICES TAB ───
+  function showService(id, btn) {
+    document.querySelectorAll('.service-full').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById('svc-' + id);
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('.services-nav button').forEach(b => b.classList.remove('active'));
+    if (btn) {
+      btn.classList.add('active');
+    } else {
+      const map = {
+        'all': 0, 'just-ropes': 1, 'more-than-ropes': 2,
+        'therapy': 3, 'projects': 4, 'events': 5, 'furniture': 6
+      };
+      const btns = document.querySelectorAll('.services-nav button');
+      if (btns[map[id] || 0]) btns[map[id] || 0].classList.add('active');
+    }
+
+    // Ensure services page is active
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) el.classList.remove('active');
+    });
+    document.getElementById('page-services').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ─── FAQ ACCORDION ───
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ─── NAV SCROLL ───
+  function updateNavScroll() {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }
+
+  window.addEventListener('scroll', updateNavScroll);
+
+  // ─── HERO BG ANIMATE ───
+  window.addEventListener('load', () => {
+    const bg = document.getElementById('heroBg');
+    if (bg) setTimeout(() => bg.classList.add('loaded'), 100);
+  });
+
+  // ─── MOBILE MENU ───
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // ─── MODAL SYSTEM ───
+  const modalContents = {
+    'consent-health': `
+      <h2>Health & Medications Consent</h2>
+      <p>Before your session, please make me aware of any conditions or medications that may have an impact on your experience. This is for your safety and is treated with complete confidence.</p>
+      <h3>This is especially important if:</h3>
+      <ul>
+        <li>Anything you take impacts your blood pressure</li>
+        <li>You have mobility issues or joint conditions</li>
+        <li>You have circulatory conditions</li>
+        <li>You are pregnant or may be pregnant</li>
+        <li>You have skin conditions sensitive to rope or touch</li>
+        <li>You have any neurological conditions that affect sensation</li>
+      </ul>
+      <p>Nothing you share will affect my willingness to work with you — it simply allows me to tailor the session to keep you safe and comfortable. All information is held in strictest confidence and never shared with any third party.</p>
+    `,
+    'consent-photos': `
+      <h2>Photography Policy</h2>
+      <p>To ensure everyone's dignity and privacy, the preferred solution is that all photos are taken by myself with my camera and video equipment.</p>
+      <p>This ensures that everyone can have faces hidden or obscured, or any identifying marks covered or not recorded if required. I have masks and can place equipment over tattoos (as an example).</p>
+      <p>I would strongly discourage the use of personal devices to take photos or video during a session, as when using these, the results could be suboptimal; however, during sessions with more than 1 person, I would happily encourage the other parties to take pictures with my equipment once set up.</p>
+      <p>At the end of a session, the unedited versions of pictures will be provided to you so you can have them edited yourself if required.</p>
+      <p>No images will ever be shared publicly without your explicit written consent. You retain full ownership of your images.</p>
+    `,
+    'consent-safety': `
+      <h2>Safety Information</h2>
+      <p>In everything I do, safety of everyone involved is very important. This is why mentioning medical conditions and medications is important.</p>
+      <h3>Knots & Ties</h3>
+      <p>I have spent a long time learning the ties and knots that are safe to use, where to use them and how to tie them in a manner that should ensure safety and the ability for quick release if needed. This also includes where to use specific types of restraints on the body to avoid creating any potential pinch points.</p>
+      <h3>During the Session</h3>
+      <p>The unexpected can't be planned for and should 100% absolutely be mentioned immediately if you have any:</p>
+      <ul>
+        <li>Loss of sensation</li>
+        <li>Feelings of numbness</li>
+        <li>"Pins and needles"</li>
+        <li>Discomfort or pain</li>
+        <li>Dizziness or nausea</li>
+      </ul>
+      <p>I always have safety equipment on hand to speedily release you from any situation.</p>
+      <h3>Your Personal Safety</h3>
+      <p>Please also practise good personal safety rules: ensure others know what you are doing, where you are going and your plans for travelling back safely. I would encourage everyone to do so in all situations as a basic measure.</p>
+    `,
+    'consent-session': `
+      <h2>What to Expect in a Session</h2>
+      <h3>Before the Session</h3>
+      <p>We will have an initial consultation — either by phone, video call, or message — to discuss what you are looking for, any health information, and to make sure we are both comfortable proceeding. Nothing is ever confirmed until this has happened.</p>
+      <h3>On the Day</h3>
+      <p>Sessions typically last between 2 and 3 hours. Please plan enough time to enjoy the session without needing to rush, and allow additional time to clean up and get dressed at the end.</p>
+      <h3>Clothing</h3>
+      <p>Wear something comfortable and loose for travel. During the session, choose clothing you're comfortable in that allows you to feel the rope against your skin.</p>
+      <h3>Atmosphere</h3>
+      <p>Music, lighting and scents are used to create a calm, immersive environment. You are welcome to bring your own playlist or requests.</p>
+      <h3>Your Right to Stop</h3>
+      <p>At any point, for any reason, you can slow down, pause, or stop entirely. No explanation needed. Your comfort is always the priority.</p>
+      <h3>After the Session</h3>
+      <p>There is always time for aftercare — to decompress, get dressed, and reorient before you leave. Please do not plan to rush off immediately after a session.</p>
+    `
+  };
+
+  function openModal(id) {
+    const content = modalContents[id];
+    if (!content) return;
+    document.getElementById('modal-content').innerHTML = content;
+    document.getElementById('modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+  }
+
+  function closeModalDirect() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ─── FORMSPREE AJAX — Consent pre-validation + init ───
+  // Runs on DOMContentLoaded to ensure the form element exists before we touch it.
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const form = document.getElementById('fra-contact');
+    if (!form) return;
+
+    // Consent validation — capture phase so it fires BEFORE formspree's own listener.
+    // If any box is unticked we stop the submit entirely.
+    form.addEventListener('submit', function (e) {
+      const c1 = document.getElementById('fconsent1').checked;
+      const c2 = document.getElementById('fconsent2').checked;
+      const c3 = document.getElementById('fconsent3').checked;
+      const consentError = document.getElementById('consent-error');
+      if (!c1 || !c2 || !c3) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        consentError.style.display = 'block';
+        consentError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+      consentError.style.display = 'none';
+    }, true); // useCapture: true — runs before formspree's bubble-phase listener
+
+    // Hide submit button styling while submitting (data-fs-submit-btn handles disabled state)
+    form.addEventListener('submit', function () {
+      const btn = form.querySelector('[data-fs-submit-btn]');
+      if (btn) btn.style.opacity = '0.6';
+    });
+
+    // Initialise Formspree Ajax with your live form ID
+    window.formspree = window.formspree || function () {
+      (formspree.q = formspree.q || []).push(arguments);
+    };
+    formspree('initForm', { formElement: '#fra-contact', formId: 'xrerljdq' });
+  });
+
+  // ─── KEYBOARD CLOSE ───
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModalDirect();
+  });
+</script>
+<!-- Formspree Ajax library — handles submission, error display, success state -->
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>
